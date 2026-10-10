@@ -73,6 +73,8 @@ setTimeout(() => {
     "输出区渲染出视觉指令段");
   ok(outEn.textContent.includes("no watermark"), "硬约束出现在提示词里");
   ok(outEn.textContent.includes("3:4"), "画幅比例出现在提示词里");
+  // 排版红线以前只在 fonts.json 里、从不进提示词（断链），这条断言防复发
+  ok(outEn.textContent.includes("no more than 40%"), "排版红线出现在合成器提示词里");
   ok(!!doc.getElementById("why").textContent.includes("形态"),
     "配方说明渲染出内容");
 
@@ -235,6 +237,8 @@ try{ window.localStorage.clear(); }catch(e){}
   ok(doc.getElementById("cOut").textContent.includes("no watermark")
     || doc.getElementById("cOut").textContent.includes("不要出现任何水印"),
     "自定义提示词含水印约束");
+  ok(doc.getElementById("cOut").textContent.includes("no more than 40%"),
+    "自定义提示词含排版红线");
   // 点预设要自动填主题并重算
   doc.querySelectorAll("#topicGrid .preset")[1].dispatchEvent(new window.Event("click"));
   ok(doc.getElementById("cHook").value.length > 0, "点选题预设自动填入主题");

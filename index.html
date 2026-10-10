@@ -362,6 +362,14 @@ const DATA_OF = {form:"forms", cover:"covers", layout2:"layouts165", style:"styl
                  palette2:"palette36", size:"sizes", palette:"palettes",
                  font:"fonts", decor:"decor"};
 const HARD = "no watermark, no logo, no deformed fingers, natural features";
+/* 排版红线以前只躺在 fonts.json 的 redlines 里，界面不显示、提示词也不拼 —— 等于白写。
+   这些是画面约束（字号 / 文字面积 / 层级上限），不是文案约束，所以必须进视觉指令。
+   规则只认 fonts.json 一处，代码里不另写一份，改数据即可生效。 */
+function typoEn(){
+  const m = (typeof D !== "undefined" && D.fonts && D.fonts.meta) ? D.fonts.meta : null;
+  return (m && m.typoEn) ? m.typoEn : "";
+}
+if (typeof window !== "undefined") window.typoEn = typoEn;
 // 取词条：单数 key 进，复数表出
 const get = (k, code)=> ((D[DATA_OF[k]] || {items:[]}).items.find(x=>x.code===code) || {});
 const PICK = (d)=> get(d.k, state[d.k]);
@@ -451,7 +459,8 @@ function render(){
   const parts = [style.prompt, theme.prompt, layout.prompt];
   if(decor.prompt) parts.push(decor.prompt);
   parts.push(size.prompt);
-  const en = parts.filter(Boolean).join(", ") + ", " + HARD;
+  const typo = typoEn();
+  const en = parts.filter(Boolean).join(", ") + (typo ? ", " + typo : "") + ", " + HARD;
 
   document.getElementById("outEn").innerHTML =
     `<span class="hd"># 视觉指令（英文，可直接出图）</span>\n` +
@@ -487,7 +496,8 @@ function render(){
     `② <b>主题色</b>定主色调与情绪 —— 决定画面的情绪底色<br>` +
     `③ <b>排版</b>（${layout.code}）定信息结构 —— 这一段最长，决定信息怎么排，也是最影响可读性的部分<br>` +
     `④ <b>装饰</b>是点缀，可删<br>` +
-    `⑤ <b>硬约束</b>固定结尾，防止模型加水印/畸变，也给叠中文留干净空间`;
+    `⑤ <b>硬约束</b>固定结尾，防止模型加水印/畸变，也给叠中文留干净空间<br>` +
+    `⑥ <b>排版约束</b>自动带上（主标题 3-7 字放中上部 / 文字面积≤40% / 最多两种字体）—— 来自字体规范层红线`;
 
   try{ localStorage.setItem("xhs", JSON.stringify({state, manual})); }catch(e){}
 }
@@ -545,7 +555,13 @@ function renderEntries(){
   ).join("");
   document.querySelectorAll("#dimTabs button").forEach(b=> b.onclick=()=>{ curDim=b.dataset.d; renderEntries(); });
   const g = document.getElementById("entryGrid");
-  g.innerHTML = D[DATA_OF[curDim]].items.map(it=>{
+  // 字体维度把红线摆出来：这些规则已经拼进提示词，但使用者得看得见才知道提示词里多了什么
+  const rl = (curDim === "font" && D.fonts && D.fonts.meta) ? (D.fonts.meta.redlines || []) : [];
+  const rlBox = rl.length
+    ? `<div class="warnbox on" style="margin-bottom:10px">⚠ <b>排版红线（已自动拼进提示词）</b><br>`
+      + rl.map(x => "· " + x).join("<br>") + `</div>`
+    : "";
+  g.innerHTML = rlBox + D[DATA_OF[curDim]].items.map(it=>{
     const bf = (it.bestFor||[]).slice(0,4).map(x=>`<span class="tag">${x}</span>`).join("");
     return `<div class="card">
       <div class="code">${it.code}</div>
@@ -714,8 +730,10 @@ function customEn(){
   if(decor.prompt) parts.push(decor.prompt);
   parts.push(size.prompt);
   // 把用户主题拼在最前面（模型对首句最敏感）
+  const typo = typoEn();
   return (hook ? hook + "。小红书风格信息图。竖版3:4。" : "小红书风格信息图。竖版3:4。")
        + parts.filter(Boolean).join("，") + head + (det ? "，" + det : "")
+       + (typo ? "，" + typo : "")
        + "。图中不要出现任何水印或logo。";
 }
 

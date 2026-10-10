@@ -11,8 +11,10 @@
       "主标题 3-7 字、字号 72-120px、放中上部；文字面积≤画面40%",
       "每段≤3行，行距1.5-2倍；重点词加粗/换色(红蓝)；数字用色块高亮"
     ],
+    "typoEn": "title 3-7 Chinese characters in the upper-center at large size, text occupies no more than 40% of the frame, at most two typefaces, each text block within 3 lines, emphasize keywords by weight or color only (no more than two emphasis styles), no decorative display font stacked over handwriting",
+    "typoWhy": "排版红线进提示词的英文版。与 redlines 同源，改一处即可；进提示词是因为这些是画面约束（字号/面积/层级），不是文案约束。",
     "basedOn": ["小红书图文排版实操手册"],
-    "updated": "2026-10-09"
+    "updated": "2026-10-11"
   },
   "items": [
     { "code": "FT-01", "zh": "无衬线(默认首选)", "fonts": ["思源黑体", "苹方", "汉仪旗黑"], "use": "通用/专业/商业", "prompt": "clean sans-serif typography" },
