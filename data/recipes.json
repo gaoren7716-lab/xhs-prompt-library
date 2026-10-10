@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "dimension": "recipe",
+    "zh": "组合配方层（范例）",
+    "desc": "把多个维度组合成一条可直接出图的完整提示词。形式：英文视觉指令(模型渲染) + 中文文案模板(使用者填)。",
+    "count": 3,
+    "basedOn": ["分类总览 §9 组合规则"],
+    "updated": "2026-10-09"
+  },
+  "items": [
+    {
+      "code": "RC-01",
+      "name": "护肤教程封面+内页",
+      "combo": { "form": "FO-02", "cover": "CV-03", "layout": "LO-05", "style": "ST-11", "size": "SZ-01", "palette": "PA-06", "font": "FT-02", "decor": "DE-01" },
+      "visualPrompt": "Xiaohongshu infographic, cream healing style, low-saturation beige and pale apricot palette, single skincare product image occupies 70% of frame with text on top quarter, flow timeline layout showing 5 steps connected by arrows, rounded handwritten font, tasteful emoji step markers, vertical 3:4 aspect ratio, soft window natural light, clean and gentle, no watermark, no logo",
+      "copyTemplate": {
+        "主标题": "5步晨间护肤｜早八人也能发光",
+        "副标题": "油皮亲测｜每步≤1分钟",
+        "步骤1-5": "洁面→爽肤水→精华→眼霜→防晒（每条≤30字）",
+        "结尾引导": "戳合集看夜护流程｜收藏备用"
+      },
+      "notes": "教程型核心是信息密度+可操作性；步骤图必须同角度同光线，否则像拼凑。"
+    },
+    {
+      "code": "RC-02",
+      "name": "气垫横评测评图",
+      "combo": { "form": "FO-03", "cover": "CV-05", "layout": "LO-04", "style": "ST-05", "size": "SZ-01", "palette": "PA-01", "font": "FT-01", "decor": "DE-06" },
+      "visualPrompt": "Xiaohongshu infographic, minimalist style, deep blue white and light gray palette, binary comparison layout split 50/50 left-right with thin divider, two cushion products side by side same angle, a comparison table below with columns price effect skin-type, clean sans-serif typography, semi-transparent block behind text for readability, vertical 3:4 aspect ratio, professional and clear, no watermark, no logo",
+      "copyTemplate": {
+        "主标题": "9款热门气垫实测｜混油皮该选哪款",
+        "对比维度": "价格 / 持妆 / 遮瑕 / 适用肤质（≥3列）",
+        "结论": "油皮TOP3：A稳妆 B遮瑕 C性价比",
+        "结尾引导": "扣1发完整测评表"
+      },
+      "notes": "测评价值是决策辅助，长尾流量恐怖；对比图必须同角度同光线，只改核心变量。"
+    },
+    {
+      "code": "RC-03",
+      "name": "旅行路书手账图",
+      "combo": { "form": "FO-08", "cover": "CV-04", "layout": "LO-10", "style": "ST-17", "size": "SZ-01", "palette": "PA-06", "font": "FT-02", "decor": "DE-03" },
+      "visualPrompt": "Xiaohongshu infographic, journaling style, hand-drawn stickers and sticky-note paper texture, washi tape, continuous scene layout showing a travel route with information nodes hidden in roads figures and landmarks, warm beige and mint palette, handwritten font, personal and cozy, vertical 3:4 aspect ratio, no watermark, no logo",
+      "copyTemplate": {
+        "主标题": "喀纳斯3天2晚路书｜秋色封神",
+        "路线节点": "贾登峪→观鱼台→三湾→木栈道徒步→雪山湖泊",
+        "实用信息": "交通/美食/注意事项分项便签",
+        "结尾引导": "收藏｜下次直接照走"
+      },
+      "notes": "连续场景型不要拆成规则网格，用场景关系串联信息；同色系保证合集统一。"
+    }
+  ]
+}

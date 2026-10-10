@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "dimension": "decor",
+    "zh": "装饰元素层",
+    "desc": "点睛道具。emoji 每100字1-2个，别滥用。",
+    "count": 8,
+    "basedOn": ["小红书图文排版指南", "爆款拆解"],
+    "updated": "2026-10-09"
+  },
+  "items": [
+    { "code": "DE-01", "zh": "emoji图标", "use": "替代重复词/分割/情绪", "prompt": "tasteful emoji icons as accents" },
+    { "code": "DE-02", "zh": "手绘贴纸/卡通", "use": "增强趣味与记忆点", "prompt": "hand-drawn stickers and cute cartoon elements" },
+    { "code": "DE-03", "zh": "便签纸质感", "use": "手账风/真实感", "prompt": "sticky-note paper texture" },
+    { "code": "DE-04", "zh": "对话气泡", "use": "故事/截图风", "prompt": "speech bubbles" },
+    { "code": "DE-05", "zh": "荧光笔划线", "use": "强调关键词(study-notes风)", "prompt": "highlighter underline on keywords" },
+    { "code": "DE-06", "zh": "色块/半透明蒙版", "use": "压字保证可读性(透明度60-70%)", "prompt": "semi-transparent color block behind text for readability" },
+    { "code": "DE-07", "zh": "引导线/箭头", "use": "拆解图/流程图", "prompt": "leader lines and arrows" },
+    { "code": "DE-08", "zh": "水印/账号名片", "use": "品牌识别，防搬运", "prompt": "subtle watermark or account card" }
+  ]
+}

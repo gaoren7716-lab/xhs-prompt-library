@@ -1,0 +1,298 @@
+{
+ "meta": {
+  "dimension": "palette2",
+  "zh": "主题色层（36 色）",
+  "desc": "可直接指定色名控制画面主色调。单色统领 / 双色搭配（主色+点缀）/ 三色调和。来源：handraw-style COLORS.md。",
+  "count": 36,
+  "basedOn": [
+   "handraw-style COLORS.md(36)"
+  ],
+  "updated": "2026-10-09"
+ },
+ "groups": [
+  {
+   "id": "G-1",
+   "zh": "经典蓝系",
+   "n": 6
+  },
+  {
+   "id": "G-2",
+   "zh": "清新绿系",
+   "n": 6
+  },
+  {
+   "id": "G-3",
+   "zh": "古典红绿",
+   "n": 6
+  },
+  {
+   "id": "G-4",
+   "zh": "浪漫粉紫",
+   "n": 6
+  },
+  {
+   "id": "G-5",
+   "zh": "暖阳大地",
+   "n": 6
+  },
+  {
+   "id": "G-6",
+   "zh": "中性色系",
+   "n": 6
+  }
+ ],
+ "items": [
+  {
+   "code": "C-01",
+   "zh": "克莱因蓝",
+   "memo": "纯粹之蓝 通向无限",
+   "prompt": "主题色：克莱因蓝（Klein Blue）。",
+   "group": "01"
+  },
+  {
+   "code": "C-02",
+   "zh": "马若雷勒蓝",
+   "memo": "热带的阳光 也偏爱这抹蓝",
+   "prompt": "主题色：马若雷勒蓝（Majorelle Blue）。",
+   "group": "01"
+  },
+  {
+   "code": "C-03",
+   "zh": "普鲁士蓝",
+   "memo": "理性的深邃 沉淀思想",
+   "prompt": "主题色：普鲁士蓝（Prussian Blue）。",
+   "group": "01"
+  },
+  {
+   "code": "C-04",
+   "zh": "钴蓝",
+   "memo": "清晰而充满生命力 日常亦可动人",
+   "prompt": "主题色：钴蓝（Cobalt Blue）。",
+   "group": "01"
+  },
+  {
+   "code": "C-05",
+   "zh": "群青",
+   "memo": "跨越时光的蓝 诗意而永恒",
+   "prompt": "主题色：群青（Ultramarine）。",
+   "group": "01"
+  },
+  {
+   "code": "C-06",
+   "zh": "孔雀蓝",
+   "memo": "优雅而神秘 生而独特",
+   "prompt": "主题色：孔雀蓝（Peacock Blue）。",
+   "group": "01"
+  },
+  {
+   "code": "C-07",
+   "zh": "蒂芙尼蓝",
+   "memo": "把美好封存 让日常闪闪发光",
+   "prompt": "主题色：蒂芙尼蓝（Tiffany Blue）。",
+   "group": "02"
+  },
+  {
+   "code": "C-08",
+   "zh": "湖蓝",
+   "memo": "盛夏的光影 让心也变得轻盈",
+   "prompt": "主题色：湖蓝（Cerulean Blue）。",
+   "group": "02"
+  },
+  {
+   "code": "C-09",
+   "zh": "薄荷绿",
+   "memo": "清新的气息 让生活更干净",
+   "prompt": "主题色：薄荷绿（Mint Green）。",
+   "group": "02"
+  },
+  {
+   "code": "C-10",
+   "zh": "鼠尾草绿",
+   "memo": "柔和的力量 让生活回归本真",
+   "prompt": "主题色：鼠尾草绿（Sage Green）。",
+   "group": "02"
+  },
+  {
+   "code": "C-11",
+   "zh": "祖母绿",
+   "memo": "深邃而珍贵 映照出更好的自己",
+   "prompt": "主题色：祖母绿（Emerald Green）。",
+   "group": "02"
+  },
+  {
+   "code": "C-12",
+   "zh": "橄榄绿",
+   "memo": "来自地中海的风 让生活更从容",
+   "prompt": "主题色：橄榄绿（Olive Green）。",
+   "group": "02"
+  },
+  {
+   "code": "C-13",
+   "zh": "维罗纳绿",
+   "memo": "古典的优雅 穿越时光而来",
+   "prompt": "主题色：维罗纳绿（Veronese Green）。",
+   "group": "03"
+  },
+  {
+   "code": "C-14",
+   "zh": "森林绿",
+   "memo": "林间的宁静 让心灵回归自然",
+   "prompt": "主题色：森林绿（Forest Green）。",
+   "group": "03"
+  },
+  {
+   "code": "C-15",
+   "zh": "朱砂红",
+   "memo": "东方的温度 点亮生活的诗意",
+   "prompt": "主题色：朱砂红（Cinnabar Red）。",
+   "group": "03"
+  },
+  {
+   "code": "C-16",
+   "zh": "中国红",
+   "memo": "喜悦的色彩 连接每一个团圆",
+   "prompt": "主题色：中国红（Chinese Red）。",
+   "group": "03"
+  },
+  {
+   "code": "C-17",
+   "zh": "勃艮第红",
+   "memo": "醇厚的时光 沉淀生活的品味",
+   "prompt": "主题色：勃艮第红（Burgundy）。",
+   "group": "03"
+  },
+  {
+   "code": "C-18",
+   "zh": "庞贝红",
+   "memo": "历史的回响 赋予当下新的力量",
+   "prompt": "主题色：庞贝红（Pompeian Red）。",
+   "group": "03"
+  },
+  {
+   "code": "C-19",
+   "zh": "玫瑰红",
+   "memo": "热烈的浪漫 永不凋零",
+   "prompt": "主题色：玫瑰红（Rose Red）。",
+   "group": "04"
+  },
+  {
+   "code": "C-20",
+   "zh": "洋红",
+   "memo": "自信的姿态 走向更大的世界",
+   "prompt": "主题色：洋红（Magenta）。",
+   "group": "04"
+  },
+  {
+   "code": "C-21",
+   "zh": "珊瑚粉",
+   "memo": "海风的温柔 治愈所有疲惫",
+   "prompt": "主题色：珊瑚粉（Coral Pink）。",
+   "group": "04"
+  },
+  {
+   "code": "C-22",
+   "zh": "灰粉",
+   "memo": "温柔的力量 让日常更美好",
+   "prompt": "主题色：灰粉（Dusty Rose）。",
+   "group": "04"
+  },
+  {
+   "code": "C-23",
+   "zh": "薰衣草紫",
+   "memo": "浪漫的宁静 让心灵自由呼吸",
+   "prompt": "主题色：薰衣草紫（Lavender）。",
+   "group": "04"
+  },
+  {
+   "code": "C-24",
+   "zh": "帝王紫",
+   "memo": "高贵的气度 成就非凡的自己",
+   "prompt": "主题色：帝王紫（Imperial Purple）。",
+   "group": "04"
+  },
+  {
+   "code": "C-25",
+   "zh": "爱马仕橙",
+   "memo": "优雅的热爱 成就更好的自己",
+   "prompt": "主题色：爱马仕橙（Hermès Orange）。",
+   "group": "05"
+  },
+  {
+   "code": "C-26",
+   "zh": "柿子橙",
+   "memo": "温暖的时光 总是带来好心情",
+   "prompt": "主题色：柿子橙（Persimmon Orange）。",
+   "group": "05"
+  },
+  {
+   "code": "C-27",
+   "zh": "那不勒斯黄",
+   "memo": "柔和的光线 让平凡的日子也变得美好",
+   "prompt": "主题色：那不勒斯黄（Naples Yellow）。",
+   "group": "05"
+  },
+  {
+   "code": "C-28",
+   "zh": "芥末黄",
+   "memo": "复古的格调 让生活更有质感",
+   "prompt": "主题色：芥末黄（Mustard Yellow）。",
+   "group": "05"
+  },
+  {
+   "code": "C-29",
+   "zh": "赭石",
+   "memo": "大地的沉静 孕育永恒的美",
+   "prompt": "主题色：赭石（Ochre）。",
+   "group": "05"
+  },
+  {
+   "code": "C-30",
+   "zh": "象牙白",
+   "memo": "纯粹而柔软 让心回归宁静",
+   "prompt": "主题色：象牙白（Ivory）。",
+   "group": "05"
+  },
+  {
+   "code": "C-31",
+   "zh": "佩恩灰",
+   "memo": "冷静而深邃 沉淀思绪",
+   "prompt": "主题色：佩恩灰（Payne's Grey）。",
+   "group": "06"
+  },
+  {
+   "code": "C-32",
+   "zh": "炭黑",
+   "memo": "克制而有力 现代而坚定",
+   "prompt": "主题色：炭黑（Charcoal Black）。",
+   "group": "06"
+  },
+  {
+   "code": "C-33",
+   "zh": "暖灰",
+   "memo": "温和而耐看 让生活松弛下来",
+   "prompt": "主题色：暖灰（Warm Grey）。",
+   "group": "06"
+  },
+  {
+   "code": "C-34",
+   "zh": "奶油白",
+   "memo": "轻柔而纯净 留下呼吸感",
+   "prompt": "主题色：奶油白（Cream White）。",
+   "group": "06"
+  },
+  {
+   "code": "C-35",
+   "zh": "石板灰",
+   "memo": "理性而利落 充满建筑感",
+   "prompt": "主题色：石板灰（Slate Gray）。",
+   "group": "06"
+  },
+  {
+   "code": "C-36",
+   "zh": "米驼色",
+   "memo": "自然而高级 温柔又克制",
+   "prompt": "主题色：米驼色（Taupe）。",
+   "group": "06"
+  }
+ ]
+}

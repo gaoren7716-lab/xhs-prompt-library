@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "dimension": "font",
+    "zh": "字体规范层",
+    "desc": "字怎么排、用什么字。正文系统字体不能换，只能用字号/加粗/颜色/空行/emoji 做层级。",
+    "count": 3,
+    "redlines": [
+      "商用字体注意授权，别踩版权",
+      "封面制图最多 2 种字体（标题一款+正文一款）",
+      "别手写体叠艺术字",
+      "主标题 3-7 字、字号 72-120px、放中上部；文字面积≤画面40%",
+      "每段≤3行，行距1.5-2倍；重点词加粗/换色(红蓝)；数字用色块高亮"
+    ],
+    "basedOn": ["小红书图文排版实操手册"],
+    "updated": "2026-10-09"
+  },
+  "items": [
+    { "code": "FT-01", "zh": "无衬线(默认首选)", "fonts": ["思源黑体", "苹方", "汉仪旗黑"], "use": "通用/专业/商业", "prompt": "clean sans-serif typography" },
+    { "code": "FT-02", "zh": "手写体/圆体", "fonts": ["手写体", "圆体字"], "use": "cute/手账/情绪", "prompt": "handwritten or rounded font, warm and approachable" },
+    { "code": "FT-03", "zh": "衬线", "fonts": ["衬线体"], "use": "retro/杂志/文艺", "prompt": "elegant serif typography" }
+  ]
+}

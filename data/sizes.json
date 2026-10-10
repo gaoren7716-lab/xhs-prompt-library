@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "dimension": "size",
+    "zh": "尺寸比例层",
+    "desc": "出图比例与像素。横图(4:3)在信息流会被压成小图，慎用。",
+    "count": 4,
+    "basedOn": ["小红书图文排版实操手册"],
+    "updated": "2026-10-09"
+  },
+  "items": [
+    { "code": "SZ-01", "zh": "3:4 竖版", "ratio": "3:4", "px": "1080x1440", "pxAlt": "高清 1242x1660", "use": "图文笔记黄金比例，占屏最大", "prompt": "vertical 3:4 aspect ratio" },
+    { "code": "SZ-02", "zh": "9:16 竖版", "ratio": "9:16", "px": "1080x1920", "pxAlt": "", "use": "封面/视频/竖屏海报", "prompt": "vertical 9:16 aspect ratio" },
+    { "code": "SZ-03", "zh": "1:1 方版", "ratio": "1:1", "px": "1080x1080", "pxAlt": "", "use": "电商主图/头像", "prompt": "square 1:1 aspect ratio" },
+    { "code": "SZ-04", "zh": "16:9 横版", "ratio": "16:9", "px": "1920x1080", "pxAlt": "", "use": "横版banner/背景", "prompt": "horizontal 16:9 aspect ratio" }
+  ]
+}

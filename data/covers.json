@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "dimension": "cover",
+    "zh": "封面类型层",
+    "desc": "首图结构，决定信息流里 0.5 秒点击。三要素：有人感、有场景、有利益点。",
+    "count": 10,
+    "basedOn": ["高点击率封面秘籍", "爆款笔记创作与变现"],
+    "updated": "2026-10-09"
+  },
+  "items": [
+    { "code": "CV-01", "zh": "大字报封面", "en": "big-poster", "visual": "纯色底+超大字，无多余装饰", "bestFor": ["生活", "情感", "干货强观点"], "ctrLift": "+25%" },
+    { "code": "CV-02", "zh": "纯文字封面", "en": "pure-text", "visual": "高对比大字号，痛点+方案", "bestFor": ["知识", "教程", "情感"], "ctrLift": "+25%" },
+    { "code": "CV-03", "zh": "单图+文字", "en": "single-image-text", "visual": "主体图占70%+，文字压顶部", "bestFor": ["美妆", "穿搭", "家居"], "ctrLift": "+15~45%" },
+    { "code": "CV-04", "zh": "多图拼贴", "en": "collage-cover", "visual": "3-4张同色调图并置+中央标题", "bestFor": ["攻略合集", "测评", "步骤"], "ctrLift": "高信息量可读" },
+    { "code": "CV-05", "zh": "对比冲击", "en": "contrast", "visual": "前后/左右同角度分屏", "bestFor": ["健身", "改造", "妆前妆后"], "ctrLift": "+38%" },
+    { "code": "CV-06", "zh": "真人+表情", "en": "real-person", "visual": "面部特写60%+，背景虚化", "bestFor": ["美妆测评", "生活吐槽"], "ctrLift": "+45%" },
+    { "code": "CV-07", "zh": "卡通表情", "en": "cartoon-emoji", "visual": "年轻化表情+情绪文字", "bestFor": ["生活", "科普", "娱乐"], "ctrLift": "轻松吸睛" },
+    { "code": "CV-08", "zh": "聊天截图", "en": "chat-screenshot", "visual": "截对话，留悬念不截全", "bestFor": ["娱乐", "职场", "咨询"], "ctrLift": "激发好奇" },
+    { "code": "CV-09", "zh": "氛围静物", "en": "ambient-still", "visual": "低饱和滤镜，光影质感", "bestFor": ["探店", "好物"], "ctrLift": "+15%" },
+    { "code": "CV-10", "zh": "杂志风", "en": "magazine-cover", "visual": "版式结构+画面平衡", "bestFor": ["穿搭", "生活方式"], "ctrLift": "高级感" }
+  ]
+}
