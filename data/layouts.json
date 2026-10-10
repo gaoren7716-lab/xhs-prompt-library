@@ -2,26 +2,183 @@
   "meta": {
     "dimension": "layout",
     "zh": "排版布局层",
-    "desc": "内页信息的骨架。底层 117 种布局（参考 handraw-style/LAYOUTS.md）归纳为 15 组。prompt 为排版指令，可与风格层叠加。",
+    "desc": "内页信息的骨架。底层 117 种布局归纳为 15 组。prompt 为排版指令，可与风格层叠加。",
     "count": 15,
-    "basedOn": ["handraw-style LAYOUTS.md(117)", "baoyu-xhs-images 布局库(8)", "爆款拆解归纳"],
+    "basedOn": [
+      "爆款拆解归纳"
+    ],
     "updated": "2026-10-09"
   },
   "items": [
-    { "code": "LO-01", "zh": "大字标题型", "en": "big-title", "desc": "一句话占满画面，极致冲击", "bestFor": ["大字报封面", "强观点"], "prompt": "big-title layout, one short phrase fills the frame, maximum visual impact, centered bold typography" },
-    { "code": "LO-02", "zh": "清单列表型", "en": "list", "desc": "枚举排名，每项一行，带序号", "bestFor": ["清单合集", "排名"], "prompt": "list layout, enumerated ranking format, one item per line with number markers, clean vertical rhythm" },
-    { "code": "LO-03", "zh": "卡片网格型", "en": "card-grid", "desc": "多模块宫格，信息分区", "bestFor": ["干货", "测评", "多要点"], "prompt": "card grid layout, multiple modular cards in a grid, clear information zones, balanced spacing" },
-    { "code": "LO-04", "zh": "对比型", "en": "binary-comparison", "desc": "左右/上下 50% 分屏，细线分隔", "bestFor": ["测评对比", "A vs B"], "prompt": "binary comparison layout, split 50/50 left-right or top-bottom, thin divider line, two columns of parallel info" },
-    { "code": "LO-05", "zh": "流程时间线型", "en": "flow-timeline", "desc": "线性步骤 3–6 步，箭头串联", "bestFor": ["教程", "步骤", "时间线"], "prompt": "flow timeline layout, linear 3 to 6 steps connected by arrows, numbered sequence, clear progression" },
-    { "code": "LO-06", "zh": "思维导图型", "en": "mindmap", "desc": "中心放射 4–8 分支", "bestFor": ["学习法", "复盘", "概念"], "prompt": "mind map layout, central node radiating 4 to 8 branches, organic connections, hierarchical clarity" },
-    { "code": "LO-07", "zh": "四象限分区型", "en": "quadrant", "desc": "圆形或方形四分区", "bestFor": ["多维度分析", "优劣"], "prompt": "quadrant layout, four zones in a square or circle, each zone a distinct dimension, clear labels" },
-    { "code": "LO-08", "zh": "拆解爆炸图型", "en": "exploded", "desc": "主体+零件引导线，表现组成", "bestFor": ["产品组成", "结构"], "prompt": "exploded diagram layout, main object with parts separated around it, leader lines labeling each component" },
-    { "code": "LO-09", "zh": "剖面截面型", "en": "cross-section", "desc": "切开看内部功能分区", "bestFor": ["建筑", "结构", "设备"], "prompt": "cross-section layout, object cut open to show internal spaces and functional zones, readable interior" },
-    { "code": "LO-10", "zh": "连续场景型", "en": "continuous-scene", "desc": "一幅连贯场景藏信息节点", "bestFor": ["旅行路线", "叙事"], "prompt": "continuous scene layout, one coherent scene where information nodes hide in roads, figures, props; not a grid" },
-    { "code": "LO-11", "zh": "人物群像标签型", "en": "character-labels", "desc": "多角色自由站位+短标签", "bestFor": ["团队", "角色介绍", "对比人物"], "prompt": "character group layout, multiple figures freely positioned with short labels, clear spacing and balance" },
-    { "code": "LO-12", "zh": "一大多小图谱型", "en": "hub-spoke", "desc": "大核心图+周围小单元", "bestFor": ["概念科普", "知识关联"], "prompt": "hub and spoke layout, one large central visual with smaller units around it, each labeled, knowledge web" },
-    { "code": "LO-13", "zh": "百科全书信息卡型", "en": "encyclopedia", "desc": "顶部标本+中部模块+底部来源", "bestFor": ["物种", "物件科普"], "prompt": "encyclopedia card layout, top specimen display, middle asymmetric info modules, bottom source area, three-section" },
-    { "code": "LO-14", "zh": "尺度比较型", "en": "scale-compare", "desc": "多对象按真实大小排列", "bestFor": ["尺寸", "量级对比"], "prompt": "scale comparison layout, multiple objects arranged by real or relative size, baseline and arrows show progression" },
-    { "code": "LO-15", "zh": "密集模块型", "en": "dense-modules", "desc": "高信息密度知识卡 5–8 点", "bestFor": ["干货总结", "收藏卡"], "prompt": "dense modules layout, high information density knowledge card, 5 to 8 points, compact but readable" }
+    {
+      "code": "LO-01",
+      "zh": "大字标题型",
+      "en": "big-title",
+      "desc": "一句话占满画面，极致冲击",
+      "bestFor": [
+        "大字报封面",
+        "强观点"
+      ],
+      "prompt": "big-title layout, one short phrase fills the frame, maximum visual impact, centered bold typography"
+    },
+    {
+      "code": "LO-02",
+      "zh": "清单列表型",
+      "en": "list",
+      "desc": "枚举排名，每项一行，带序号",
+      "bestFor": [
+        "清单合集",
+        "排名"
+      ],
+      "prompt": "list layout, enumerated ranking format, one item per line with number markers, clean vertical rhythm"
+    },
+    {
+      "code": "LO-03",
+      "zh": "卡片网格型",
+      "en": "card-grid",
+      "desc": "多模块宫格，信息分区",
+      "bestFor": [
+        "干货",
+        "测评",
+        "多要点"
+      ],
+      "prompt": "card grid layout, multiple modular cards in a grid, clear information zones, balanced spacing"
+    },
+    {
+      "code": "LO-04",
+      "zh": "对比型",
+      "en": "binary-comparison",
+      "desc": "左右/上下 50% 分屏，细线分隔",
+      "bestFor": [
+        "测评对比",
+        "A vs B"
+      ],
+      "prompt": "binary comparison layout, split 50/50 left-right or top-bottom, thin divider line, two columns of parallel info"
+    },
+    {
+      "code": "LO-05",
+      "zh": "流程时间线型",
+      "en": "flow-timeline",
+      "desc": "线性步骤 3–6 步，箭头串联",
+      "bestFor": [
+        "教程",
+        "步骤",
+        "时间线"
+      ],
+      "prompt": "flow timeline layout, linear 3 to 6 steps connected by arrows, numbered sequence, clear progression"
+    },
+    {
+      "code": "LO-06",
+      "zh": "思维导图型",
+      "en": "mindmap",
+      "desc": "中心放射 4–8 分支",
+      "bestFor": [
+        "学习法",
+        "复盘",
+        "概念"
+      ],
+      "prompt": "mind map layout, central node radiating 4 to 8 branches, organic connections, hierarchical clarity"
+    },
+    {
+      "code": "LO-07",
+      "zh": "四象限分区型",
+      "en": "quadrant",
+      "desc": "圆形或方形四分区",
+      "bestFor": [
+        "多维度分析",
+        "优劣"
+      ],
+      "prompt": "quadrant layout, four zones in a square or circle, each zone a distinct dimension, clear labels"
+    },
+    {
+      "code": "LO-08",
+      "zh": "拆解爆炸图型",
+      "en": "exploded",
+      "desc": "主体+零件引导线，表现组成",
+      "bestFor": [
+        "产品组成",
+        "结构"
+      ],
+      "prompt": "exploded diagram layout, main object with parts separated around it, leader lines labeling each component"
+    },
+    {
+      "code": "LO-09",
+      "zh": "剖面截面型",
+      "en": "cross-section",
+      "desc": "切开看内部功能分区",
+      "bestFor": [
+        "建筑",
+        "结构",
+        "设备"
+      ],
+      "prompt": "cross-section layout, object cut open to show internal spaces and functional zones, readable interior"
+    },
+    {
+      "code": "LO-10",
+      "zh": "连续场景型",
+      "en": "continuous-scene",
+      "desc": "一幅连贯场景藏信息节点",
+      "bestFor": [
+        "旅行路线",
+        "叙事"
+      ],
+      "prompt": "continuous scene layout, one coherent scene where information nodes hide in roads, figures, props; not a grid"
+    },
+    {
+      "code": "LO-11",
+      "zh": "人物群像标签型",
+      "en": "character-labels",
+      "desc": "多角色自由站位+短标签",
+      "bestFor": [
+        "团队",
+        "角色介绍",
+        "对比人物"
+      ],
+      "prompt": "character group layout, multiple figures freely positioned with short labels, clear spacing and balance"
+    },
+    {
+      "code": "LO-12",
+      "zh": "一大多小图谱型",
+      "en": "hub-spoke",
+      "desc": "大核心图+周围小单元",
+      "bestFor": [
+        "概念科普",
+        "知识关联"
+      ],
+      "prompt": "hub and spoke layout, one large central visual with smaller units around it, each labeled, knowledge web"
+    },
+    {
+      "code": "LO-13",
+      "zh": "百科全书信息卡型",
+      "en": "encyclopedia",
+      "desc": "顶部标本+中部模块+底部来源",
+      "bestFor": [
+        "物种",
+        "物件科普"
+      ],
+      "prompt": "encyclopedia card layout, top specimen display, middle asymmetric info modules, bottom source area, three-section"
+    },
+    {
+      "code": "LO-14",
+      "zh": "尺度比较型",
+      "en": "scale-compare",
+      "desc": "多对象按真实大小排列",
+      "bestFor": [
+        "尺寸",
+        "量级对比"
+      ],
+      "prompt": "scale comparison layout, multiple objects arranged by real or relative size, baseline and arrows show progression"
+    },
+    {
+      "code": "LO-15",
+      "zh": "密集模块型",
+      "en": "dense-modules",
+      "desc": "高信息密度知识卡 5–8 点",
+      "bestFor": [
+        "干货总结",
+        "收藏卡"
+      ],
+      "prompt": "dense modules layout, high information density knowledge card, 5 to 8 points, compact but readable"
+    }
   ]
 }

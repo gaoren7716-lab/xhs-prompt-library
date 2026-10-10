@@ -225,12 +225,12 @@ keys.forEach((k) => {
 }
 
 // ---- 2.7 新增精细图鉴的内容质量 ---------------------------------
-// 从 handraw 吸收的 layouts165 / palette36 是「拿来就出图」的内容层，
+// layouts165 / palette36 是「拿来就出图」的内容层，
 // 必须验 prompt 本身可用：非空、含小红书前缀、含固定收尾约束。
 const lay2 = JSON.parse(fs.readFileSync(path.join(DATA, "layouts165.json"), "utf8"));
 ok(lay2.items.length === 165, "layouts165 有 165 条", `实际 ${lay2.items.length}`);
 // 提示词长度：IP 段有 2 条上游原文仅一句话（IP-003 / IP-011），信息量不足以直接出图。
-// 不改上游数据（那是 handraw 的内容），但必须如实记为「需补充」，不能假装齐整。
+// 不改上游数据，但必须如实记为「需补充」，不能假装齐整。
 const layCats = {};
 const THIN = 20;
 const thin = [];

@@ -23,7 +23,7 @@ function checkCopy(root) {
     "data/forms.json", "data/covers.json", "data/layouts.json",
     "data/styles.json", "data/palettes.json", "data/fonts.json",
     "data/decor.json", "data/sizes.json", "data/stylepair.json",
-    "FRAMEWORK.md", "README.md", "怎么用.md", "吸收了什么.md",
+    "FRAMEWORK.md", "README.md", "怎么用.md",
   ];
 
   const generic = new Set(ref.allowedGeneric);

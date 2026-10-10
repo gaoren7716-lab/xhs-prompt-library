@@ -22,7 +22,7 @@ const FILES = [
   "forms", "covers", "layouts", "styles",
   "sizes", "palettes", "fonts", "decor",
   "recipes", "cases",
-  // 吸收自 handraw-style 的精细图鉴
+  // 精细图鉴
   "layouts165", "palette36", "stylepair",
   // 示例画廊 + 自定义工作台
   "gallery", "custom", "rights",

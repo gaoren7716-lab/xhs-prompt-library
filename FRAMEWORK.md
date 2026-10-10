@@ -2,7 +2,6 @@
 
 > 本文件只讲**框架本身**：9 个维度是什么、谁决定什么、按什么顺序拼。
 > 条目明细在 `data/*.json`，验证案例在 `data/cases.json`。
-> 本轮从 handraw-style / anime-prompt-library 吸收了什么，见 `吸收了什么.md`。
 
 ---
 

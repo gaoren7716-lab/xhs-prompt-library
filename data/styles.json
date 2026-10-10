@@ -4,29 +4,347 @@
     "zh": "视觉风格层",
     "desc": "决定整体的气质与调性。prompt 字段为可直接投入图像模型的视觉指令（英文，模型更稳）；中文文案在组合时另行填入。",
     "count": 20,
-    "basedOn": ["baoyu-xhs-images 风格库(12)", "市场高频风格归纳(稿定/美图/可画)"],
+    "basedOn": [
+      "市场高频风格归纳(稿定/美图/可画)"
+    ],
     "updated": "2026-10-09"
   },
   "items": [
-    { "code": "ST-01", "zh": "甜美可爱少女风", "en": "cute", "alias": ["少女风", "可爱风"], "desc": "甜美、可爱、少女感，经典小红书美学", "bestFor": ["美妆", "时尚", "女孩向", "粉色内容"], "prompt": "cute style, sweet and lovely girly aesthetic, soft pastel pink palette, rounded shapes, playful and approachable, Xiaohongshu visual tone" },
-    { "code": "ST-02", "zh": "清新自然", "en": "fresh", "alias": ["干净", "自然"], "desc": "干净、清新、自然、有机", "bestFor": ["健康", "有机", "生活方式", "护肤"], "prompt": "fresh and clean style, natural light, soft green and white tones, airy and breathable, minimal organic aesthetic" },
-    { "code": "ST-03", "zh": "温馨友好", "en": "warm", "alias": ["温暖", "平易近人"], "desc": "温馨、友好、有温度", "bestFor": ["生活", "故事", "情感", "家庭"], "prompt": "warm and cozy style, soft warm light, beige and cream tones, friendly and intimate atmosphere" },
-    { "code": "ST-04", "zh": "高冲击力", "en": "bold", "alias": ["醒目", "强观点"], "desc": "高冲击、引人注目", "bestFor": ["警告", "重要", "关键", "标题党"], "prompt": "bold high-impact style, strong contrast, vivid saturated accent, large confident typography, attention-grabbing" },
-    { "code": "ST-05", "zh": "极简精致", "en": "minimal", "alias": ["简约", "高级"], "desc": "极简、精致、克制", "bestFor": ["专业", "商业", "优雅", "品牌"], "prompt": "minimalist style, clean and refined, lots of white space, restrained palette, elegant and professional" },
-    { "code": "ST-06", "zh": "复古怀旧", "en": "retro", "alias": ["复古", "怀旧"], "desc": "复古、怀旧、潮流", "bestFor": ["经典", "老物件", "传统", "文艺"], "prompt": "retro vintage style, muted film tones, grain texture, nostalgic mood, classic layout symmetry" },
-    { "code": "ST-07", "zh": "活力吸睛", "en": "pop", "alias": ["活力", "流行"], "desc": "充满活力、精力充沛、吸睛", "bestFor": ["有趣", "兴奋", "哇点", "年轻向"], "prompt": "pop art style, energetic and vivid, bright playful colors, bold shapes, fun and eye-catching" },
-    { "code": "ST-08", "zh": "极简手绘线条", "en": "notion", "alias": ["知性", "线条风"], "desc": "极简手绘线条艺术，知性", "bestFor": ["知识", "概念", "生产力", "SaaS"], "prompt": "notion-style minimal hand-drawn line art, clean white background, thin black outlines, intellectual and calm" },
-    { "code": "ST-09", "zh": "黑板粉笔", "en": "chalkboard", "alias": ["教育风", "粉笔"], "desc": "黑板上的彩色粉笔，教育风格", "bestFor": ["教育", "教程", "课堂", "知识"], "prompt": "chalkboard style, colored chalk drawing on dark green/black board, educational and handcrafted feel" },
-    { "code": "ST-10", "zh": "手写笔记", "en": "study-notes", "alias": ["笔记风", "真实手写"], "desc": "逼真手写笔记照片风格，蓝笔+红批注+黄荧光", "bestFor": ["笔记", "学习指南", "知识", "逼真"], "prompt": "realistic handwritten notes photo style, blue pen writing, red annotations, yellow highlighter marks, paper texture" },
-    { "code": "ST-11", "zh": "奶油治愈", "en": "cream", "alias": ["奶油风", "治愈"], "desc": "低饱和米白+浅杏，柔软治愈", "bestFor": ["护肤", "穿搭", "生活方式", "母婴"], "prompt": "cream healing style, low-saturation beige and pale apricot palette, soft textures, gentle and soothing, Xiaohongshu cover quality" },
-    { "code": "ST-12", "zh": "INS极简高级", "en": "ins-minimal", "alias": ["ins风", "高级感"], "desc": "干净到发光，冷白，高级商业感", "bestFor": ["品牌", "产品静物", "banner"], "prompt": "ins minimal premium style, clean to glowing, cool white tones, high-end commercial photography, lots of negative space" },
-    { "code": "ST-13", "zh": "赛博霓虹", "en": "cyber", "alias": ["霓虹", "赛博朋克"], "desc": "蓝紫粉高对比，电影感", "bestFor": ["科技", "活动海报", "音乐视觉"], "prompt": "cyberpunk neon style, blue purple pink high contrast, cinematic, glowing edge light, rainy night city" },
-    { "code": "ST-14", "zh": "日系胶片", "en": "jp-film", "alias": ["胶片", "松弛感"], "desc": "暖调颗粒，真实生活感", "bestFor": ["Vlog", "旅行", "朋友圈", "日常"], "prompt": "japanese film photography style, warm tones, slight grain, authentic daily life, soft backlight, relaxed mood" },
-    { "code": "ST-15", "zh": "电商强卖点", "en": "ecom", "alias": ["电商主图", "强卖点"], "desc": "清晰锐利商业摄影，成交导向", "bestFor": ["主图", "详情页", "产品"], "prompt": "e-commerce commercial photography, sharp and clear, premium clean, product occupies 70% frame, clean reflections" },
-    { "code": "ST-16", "zh": "杂志风", "en": "magazine", "alias": ["杂志", "版式感"], "desc": "强调版式、结构与画面平衡（含简约/时尚/复古/文艺/拼贴子类）", "bestFor": ["穿搭", "生活方式", "文艺", "美妆"], "prompt": "magazine editorial style, strong typographic layout, balanced composition, fashion or literary mood" },
-    { "code": "ST-17", "zh": "手账风", "en": "journal", "alias": ["手帐", "手绘贴纸"], "desc": "手绘贴纸+便签纸质感，真实记录感", "bestFor": ["行程", "自律", "记录", "计划"], "prompt": "journaling style, hand-drawn stickers, sticky-note paper texture, washi tape, warm and personal" },
-    { "code": "ST-18", "zh": "国潮", "en": "guochao", "alias": ["国风", "文创"], "desc": "传统元素现代化", "bestFor": ["文创", "文旅", "节日", "品牌"], "prompt": "guochao style, modernized traditional Chinese elements, bold red and gold, cultural and trendy" },
-    { "code": "ST-19", "zh": "莫兰迪", "en": "morandi", "alias": ["高级灰", "低饱和"], "desc": "低饱和高级灰，统一柔和", "bestFor": ["通用高级感", "家居", "穿搭"], "prompt": "morandi color palette, low-saturation muted gray tones, harmonious and elegant, soft unified background" },
-    { "code": "ST-20", "zh": "拼贴风", "en": "collage", "alias": ["碎片感", "多图组合"], "desc": "多图自由组合，碎片故事感", "bestFor": ["创意", "vlog", "合集", "旅行"], "prompt": "collage style, multiple images freely combined, scrapbook fragments, layered paper cutouts, playful story feel" }
+    {
+      "code": "ST-01",
+      "zh": "甜美可爱少女风",
+      "en": "cute",
+      "alias": [
+        "少女风",
+        "可爱风"
+      ],
+      "desc": "甜美、可爱、少女感，经典小红书美学",
+      "bestFor": [
+        "美妆",
+        "时尚",
+        "女孩向",
+        "粉色内容"
+      ],
+      "prompt": "cute style, sweet and lovely girly aesthetic, soft pastel pink palette, rounded shapes, playful and approachable, Xiaohongshu visual tone"
+    },
+    {
+      "code": "ST-02",
+      "zh": "清新自然",
+      "en": "fresh",
+      "alias": [
+        "干净",
+        "自然"
+      ],
+      "desc": "干净、清新、自然、有机",
+      "bestFor": [
+        "健康",
+        "有机",
+        "生活方式",
+        "护肤"
+      ],
+      "prompt": "fresh and clean style, natural light, soft green and white tones, airy and breathable, minimal organic aesthetic"
+    },
+    {
+      "code": "ST-03",
+      "zh": "温馨友好",
+      "en": "warm",
+      "alias": [
+        "温暖",
+        "平易近人"
+      ],
+      "desc": "温馨、友好、有温度",
+      "bestFor": [
+        "生活",
+        "故事",
+        "情感",
+        "家庭"
+      ],
+      "prompt": "warm and cozy style, soft warm light, beige and cream tones, friendly and intimate atmosphere"
+    },
+    {
+      "code": "ST-04",
+      "zh": "高冲击力",
+      "en": "bold",
+      "alias": [
+        "醒目",
+        "强观点"
+      ],
+      "desc": "高冲击、引人注目",
+      "bestFor": [
+        "警告",
+        "重要",
+        "关键",
+        "标题党"
+      ],
+      "prompt": "bold high-impact style, strong contrast, vivid saturated accent, large confident typography, attention-grabbing"
+    },
+    {
+      "code": "ST-05",
+      "zh": "极简精致",
+      "en": "minimal",
+      "alias": [
+        "简约",
+        "高级"
+      ],
+      "desc": "极简、精致、克制",
+      "bestFor": [
+        "专业",
+        "商业",
+        "优雅",
+        "品牌"
+      ],
+      "prompt": "minimalist style, clean and refined, lots of white space, restrained palette, elegant and professional"
+    },
+    {
+      "code": "ST-06",
+      "zh": "复古怀旧",
+      "en": "retro",
+      "alias": [
+        "复古",
+        "怀旧"
+      ],
+      "desc": "复古、怀旧、潮流",
+      "bestFor": [
+        "经典",
+        "老物件",
+        "传统",
+        "文艺"
+      ],
+      "prompt": "retro vintage style, muted film tones, grain texture, nostalgic mood, classic layout symmetry"
+    },
+    {
+      "code": "ST-07",
+      "zh": "活力吸睛",
+      "en": "pop",
+      "alias": [
+        "活力",
+        "流行"
+      ],
+      "desc": "充满活力、精力充沛、吸睛",
+      "bestFor": [
+        "有趣",
+        "兴奋",
+        "哇点",
+        "年轻向"
+      ],
+      "prompt": "pop art style, energetic and vivid, bright playful colors, bold shapes, fun and eye-catching"
+    },
+    {
+      "code": "ST-08",
+      "zh": "极简手绘线条",
+      "en": "notion",
+      "alias": [
+        "知性",
+        "线条风"
+      ],
+      "desc": "极简手绘线条艺术，知性",
+      "bestFor": [
+        "知识",
+        "概念",
+        "生产力",
+        "SaaS"
+      ],
+      "prompt": "notion-style minimal hand-drawn line art, clean white background, thin black outlines, intellectual and calm"
+    },
+    {
+      "code": "ST-09",
+      "zh": "黑板粉笔",
+      "en": "chalkboard",
+      "alias": [
+        "教育风",
+        "粉笔"
+      ],
+      "desc": "黑板上的彩色粉笔，教育风格",
+      "bestFor": [
+        "教育",
+        "教程",
+        "课堂",
+        "知识"
+      ],
+      "prompt": "chalkboard style, colored chalk drawing on dark green/black board, educational and handcrafted feel"
+    },
+    {
+      "code": "ST-10",
+      "zh": "手写笔记",
+      "en": "study-notes",
+      "alias": [
+        "笔记风",
+        "真实手写"
+      ],
+      "desc": "逼真手写笔记照片风格，蓝笔+红批注+黄荧光",
+      "bestFor": [
+        "笔记",
+        "学习指南",
+        "知识",
+        "逼真"
+      ],
+      "prompt": "realistic handwritten notes photo style, blue pen writing, red annotations, yellow highlighter marks, paper texture"
+    },
+    {
+      "code": "ST-11",
+      "zh": "奶油治愈",
+      "en": "cream",
+      "alias": [
+        "奶油风",
+        "治愈"
+      ],
+      "desc": "低饱和米白+浅杏，柔软治愈",
+      "bestFor": [
+        "护肤",
+        "穿搭",
+        "生活方式",
+        "母婴"
+      ],
+      "prompt": "cream healing style, low-saturation beige and pale apricot palette, soft textures, gentle and soothing, Xiaohongshu cover quality"
+    },
+    {
+      "code": "ST-12",
+      "zh": "INS极简高级",
+      "en": "ins-minimal",
+      "alias": [
+        "ins风",
+        "高级感"
+      ],
+      "desc": "干净到发光，冷白，高级商业感",
+      "bestFor": [
+        "品牌",
+        "产品静物",
+        "banner"
+      ],
+      "prompt": "ins minimal premium style, clean to glowing, cool white tones, high-end commercial photography, lots of negative space"
+    },
+    {
+      "code": "ST-13",
+      "zh": "赛博霓虹",
+      "en": "cyber",
+      "alias": [
+        "霓虹",
+        "赛博朋克"
+      ],
+      "desc": "蓝紫粉高对比，电影感",
+      "bestFor": [
+        "科技",
+        "活动海报",
+        "音乐视觉"
+      ],
+      "prompt": "cyberpunk neon style, blue purple pink high contrast, cinematic, glowing edge light, rainy night city"
+    },
+    {
+      "code": "ST-14",
+      "zh": "日系胶片",
+      "en": "jp-film",
+      "alias": [
+        "胶片",
+        "松弛感"
+      ],
+      "desc": "暖调颗粒，真实生活感",
+      "bestFor": [
+        "Vlog",
+        "旅行",
+        "朋友圈",
+        "日常"
+      ],
+      "prompt": "japanese film photography style, warm tones, slight grain, authentic daily life, soft backlight, relaxed mood"
+    },
+    {
+      "code": "ST-15",
+      "zh": "电商强卖点",
+      "en": "ecom",
+      "alias": [
+        "电商主图",
+        "强卖点"
+      ],
+      "desc": "清晰锐利商业摄影，成交导向",
+      "bestFor": [
+        "主图",
+        "详情页",
+        "产品"
+      ],
+      "prompt": "e-commerce commercial photography, sharp and clear, premium clean, product occupies 70% frame, clean reflections"
+    },
+    {
+      "code": "ST-16",
+      "zh": "杂志风",
+      "en": "magazine",
+      "alias": [
+        "杂志",
+        "版式感"
+      ],
+      "desc": "强调版式、结构与画面平衡（含简约/时尚/复古/文艺/拼贴子类）",
+      "bestFor": [
+        "穿搭",
+        "生活方式",
+        "文艺",
+        "美妆"
+      ],
+      "prompt": "magazine editorial style, strong typographic layout, balanced composition, fashion or literary mood"
+    },
+    {
+      "code": "ST-17",
+      "zh": "手账风",
+      "en": "journal",
+      "alias": [
+        "手帐",
+        "手绘贴纸"
+      ],
+      "desc": "手绘贴纸+便签纸质感，真实记录感",
+      "bestFor": [
+        "行程",
+        "自律",
+        "记录",
+        "计划"
+      ],
+      "prompt": "journaling style, hand-drawn stickers, sticky-note paper texture, washi tape, warm and personal"
+    },
+    {
+      "code": "ST-18",
+      "zh": "国潮",
+      "en": "guochao",
+      "alias": [
+        "国风",
+        "文创"
+      ],
+      "desc": "传统元素现代化",
+      "bestFor": [
+        "文创",
+        "文旅",
+        "节日",
+        "品牌"
+      ],
+      "prompt": "guochao style, modernized traditional Chinese elements, bold red and gold, cultural and trendy"
+    },
+    {
+      "code": "ST-19",
+      "zh": "莫兰迪",
+      "en": "morandi",
+      "alias": [
+        "高级灰",
+        "低饱和"
+      ],
+      "desc": "低饱和高级灰，统一柔和",
+      "bestFor": [
+        "通用高级感",
+        "家居",
+        "穿搭"
+      ],
+      "prompt": "morandi color palette, low-saturation muted gray tones, harmonious and elegant, soft unified background"
+    },
+    {
+      "code": "ST-20",
+      "zh": "拼贴风",
+      "en": "collage",
+      "alias": [
+        "碎片感",
+        "多图组合"
+      ],
+      "desc": "多图自由组合，碎片故事感",
+      "bestFor": [
+        "创意",
+        "vlog",
+        "合集",
+        "旅行"
+      ],
+      "prompt": "collage style, multiple images freely combined, scrapbook fragments, layered paper cutouts, playful story feel"
+    }
   ]
 }

@@ -51,7 +51,6 @@ node tools/check_copy.js       # 查重（防抄袭，≥5 字比对）
 
 - **命名**：网页维度键一律单数（`form`），数据表一律复数（`forms`），靠 `DATA_OF` 互转 —— 写混会整页白屏，只有冒烟测得出。
 - **决策归属**：form / size / style 是自主决策位，cover / layout / palette 是派生位（自动跟随，可手动锁定）。
-- **数据溯源**：165 排版图型与 36 主题色来自 handraw-style；风格层复用 baoyu-xhs-images 并扩展；借鉴边界见 `吸收了什么.md`。
 - **素材授权红线**：7 条机器查不了的法律类条目独立成 `data/rights.json`，画廊详情页常驻。
 
 ## 已知缺口
