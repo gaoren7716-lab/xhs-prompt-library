@@ -2,7 +2,12 @@
 
 把小红书信息图拆成 **9 个可组合维度**（形态 × 封面 × 排版 × 风格 × 主题色 × 尺寸 × 配色 × 字体 × 装饰），像选配方一样组合出图。纯静态网页，无需联网、无需密钥。
 
-**🌐 在线使用：https://gaoren7716-lab.github.io/xhs-prompt-library/**（也可下载后双击 `index.html` 离线使用）
+## 🌐 在线使用（点开即用）
+
+- **直连站点（国内推荐）**：<https://xhs-prompt-library.app.workbuddy.host/>
+- **GitHub Pages（境外）**：<https://gaoren7716-lab.github.io/xhs-prompt-library/>
+
+离线使用：下载仓库后双击 `index.html`。
 
 ## 示例画廊（40 张真实出图，逐张目视校验）
 
