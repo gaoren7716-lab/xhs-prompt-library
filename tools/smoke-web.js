@@ -177,6 +177,13 @@ try{ window.localStorage.clear(); }catch(e){}
     `按钮 ${gcopyBtns.length} / 卡 ${gcards.length}`);
   ok(gcopyBtns[0].dataset.copy === gcards[0].dataset.code,
     "复制按钮携带对应配方码");
+  // 合成器改用按钮：每张卡都有，点了要真的切到合成器页
+  const gloadBtns = doc.querySelectorAll("#galGrid .gload");
+  ok(gloadBtns.length === gcards.length, "每张画廊卡都有合成器改用按钮",
+    `按钮 ${gloadBtns.length} / 卡 ${gcards.length}`);
+  gloadBtns[0].dispatchEvent(new window.Event("click"));
+  ok(doc.getElementById("v-synth").classList.contains("on"),
+    "点改用按钮切到合成器页");
   // 点图应展开详情（含完整提示词），而不是直接跳合成器
   const detail = doc.getElementById("galDetail");
   ok(detail && detail.style.display === "none", "详情区默认收起");
