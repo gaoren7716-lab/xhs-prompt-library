@@ -171,6 +171,12 @@ try{ window.localStorage.clear(); }catch(e){}
   ok(gcards.length === 40, "画廊 40 张真实作品", `实际 ${gcards.length}`);
   ok(gcards[0].querySelector("img").getAttribute("src").startsWith("gallery/"),
     "画廊图片路径指向 gallery/");
+  // 卡面直接复制按钮：每张卡都有、带配方码（断链防护——按钮曾只存在于详情面板）
+  const gcopyBtns = doc.querySelectorAll("#galGrid .gcopy");
+  ok(gcopyBtns.length === gcards.length, "每张画廊卡都有卡面复制按钮",
+    `按钮 ${gcopyBtns.length} / 卡 ${gcards.length}`);
+  ok(gcopyBtns[0].dataset.copy === gcards[0].dataset.code,
+    "复制按钮携带对应配方码");
   // 点图应展开详情（含完整提示词），而不是直接跳合成器
   const detail = doc.getElementById("galDetail");
   ok(detail && detail.style.display === "none", "详情区默认收起");

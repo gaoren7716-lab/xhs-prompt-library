@@ -42,6 +42,19 @@ nav button.on{color:var(--ac);border-bottom-color:var(--ac);font-weight:600}
 .gmeta .gs{font-size:11px;color:var(--tx3);margin-bottom:7px}
 .gmeta .gc{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;color:var(--ac)}
 .gmeta .gp{font-size:10.5px;color:var(--tx3);margin-top:6px;opacity:.8}
+/* 卡面上的直接复制按钮：主行动点，不能藏在详情面板里。
+   主题红渐变实底 + 外发光，从元信息堆里跳出来；
+   点击区放大到整行、最小高 34px，触屏也点得中。
+   点击要 stopPropagation，跟「点卡看详情」区分手势。 */
+.gcopy{
+  display:block;width:100%;margin-top:8px;padding:8px 10px;min-height:34px;
+  background:linear-gradient(180deg,var(--ac2),var(--ac));
+  border:none;border-radius:8px;color:#fff;font-family:inherit;
+  font-size:13px;font-weight:700;letter-spacing:.5px;cursor:pointer;
+  box-shadow:0 1px 8px rgba(255,46,77,.35);
+}
+.gcopy:hover{filter:brightness(1.12)}
+.gcopy:active{transform:translateY(1px);filter:brightness(.96)}
 .rrow{background:var(--panel2);border:1px solid var(--line);border-left:2px solid #3a4152;border-radius:0 6px 6px 0;padding:8px 11px;margin-bottom:6px}
 .rrow.must{border-left-color:var(--ac)}
 .rrow b{display:block;font-size:12px;font-weight:500;line-height:1.6}
@@ -590,9 +603,17 @@ function renderGallery(){
         <div class="gt">${it.title}<span class="gbadge">${it.code}</span></div>
         <div class="gs">${it.scene}</div>
         <div class="gc">${it.form} · ${it.layout2} · ${it.style} · ${it.palette2}</div>
-        <div class="gp">点图看提示词 ↓</div>
+        <button class="gcopy" data-copy="${it.code}">复制提示词</button>
+        <div class="gp">点按钮一键复制 · 点图看完整配方 ↓</div>
       </div>
     </div>`).join("");
+  /* 卡面直接复制：带尺寸参数，跟详情面板的 dCopy 同一套 withSize 包装。
+     stopPropagation 是必须的：按钮嵌在 gcard 里，不拦住会把详情面板弹出来。 */
+  g.querySelectorAll(".gcopy").forEach(b=> b.onclick=(e)=>{
+    e.stopPropagation();
+    const it=G.items.find(x=>x.code===b.dataset.copy);
+    if(it) cp(withSize(it.rebuild.prompt, it.rebuild.size), b);
+  });
   g.querySelectorAll(".gcard").forEach(c=> c.onclick=()=>showDetail(c.dataset.code));
 }
 
