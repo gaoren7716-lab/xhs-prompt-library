@@ -110,6 +110,26 @@ select:focus{outline:none;border-color:var(--ac)}
 .btn:hover{background:#ff4a63}
 .btn.sec{background:var(--panel2);color:var(--tx2);border:1px solid var(--line);font-weight:500;margin-top:7px}
 .btn.sec:hover{color:var(--tx);border-color:#3a4152}
+/* 骰子按钮：图在字前，基线对齐 —— inline-flex 才能让 svg 跟文字坐在一条基线上，
+   用默认的 inline 排版会让骰子掉到字的下一行。 */
+.dicebtn{
+  display:inline-flex;align-items:center;gap:7px;width:auto;margin:0;padding:9px 18px;
+  background:linear-gradient(180deg,var(--ac2),var(--ac));
+  box-shadow:0 1px 9px rgba(255,46,77,.34);
+}
+.dicebtn:hover{background:linear-gradient(180deg,#ff8a9c,#ff4058)}
+.dice{width:15px;height:15px;flex:0 0 auto}
+/* 随机抽来的成品图：卡片内最大的一块，宽度收着放，别把提示词挤出视野。 */
+.rndimg{
+  display:block;width:100%;max-width:300px;border-radius:10px;
+  border:1px solid var(--line);margin:11px 0 12px;background:#0a0c10;
+}
+.againbtn{
+  background:var(--panel2);color:var(--tx2);border:1px solid var(--line);
+  border-radius:7px;padding:9px 15px;cursor:pointer;font:13px inherit;font-weight:600;
+  margin-left:8px;
+}
+.againbtn:hover{color:var(--tx);border-color:#3a4152}
 .warnbox{background:#2a1f10;border:1px solid #4a3a18;border-radius:7px;padding:10px 12px;font-size:12px;color:var(--warn);margin-top:10px;display:none}
 .warnbox.on{display:block}
 
@@ -285,9 +305,13 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
     <div class="hint">各维度各抽一条，凑出你没见过的组合。不是同一提示词换 seed —— 那是同一张图看六遍。</div>
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px">
       <button class="btn" id="doRoll" style="width:auto;padding:9px 22px">抽 1 组</button>
-      <button class="btn sec" id="doRoll8" style="width:auto;margin:0;padding:9px 18px">抽 8 组铺开</button>
+      <button class="btn sec" id="doRoll4" style="width:auto;margin:0;padding:9px 18px">抽 4 组</button>
+      <button class="btn sec" id="doRoll8" style="width:auto;margin:0;padding:9px 18px">抽 8 组</button>
+      <button class="btn dicebtn" id="doRandom" title="不看提示词，先看一张能直接用的成品；从 40 张真实出图里随机掷骰">
+        <svg class="dice" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="4.6" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="8" cy="8" r="1.75" fill="currentColor"/><circle cx="12" cy="12" r="1.75" fill="currentColor"/><circle cx="16" cy="16" r="1.75" fill="currentColor"/></svg>随机来一张</button>
       <span style="align-self:center;color:#6b7488;font-size:12px" id="poolInfo"></span>
     </div>
+    <div class="hint" style="margin:0 0 12px;font-size:12px">抽 1/4/8 组是<b>现凑新组合</b>；「随机来一张」是<b>从画廊 40 张真实出图里随机抽一张</b>，图和提示词都是验过的成品。</div>
     <div id="rollOut"></div>
   </div>
 </div>
@@ -808,11 +832,44 @@ function renderGacha(){
   document.getElementById("doRoll").onclick = ()=>{
     document.getElementById("rollOut").innerHTML = show(G.roll());
   };
+  document.getElementById("doRoll4").onclick = ()=>{
+    document.getElementById("rollOut").innerHTML = G.rollMany(4).map(show).join("");
+  };
   document.getElementById("doRoll8").onclick = ()=>{
     document.getElementById("rollOut").innerHTML = G.rollMany(8).map(show).join("");
   };
+  /* 随机来一张：抽的是画廊里已出图验过的成品，不是现凑的新组合。
+     两者的区别必须写在卡上：现凑的组合可能很怪但从没见过的搭配，
+     成品则是「这张确实能出成这样的图」——图与提示词一一对应。 */
+  /* 画廊文本直接进 innerHTML，必须转义 —— 标题里一个 & 就够把标签结构打乱。 */
+  const esc = (s)=> String(s==null?"":s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const dimTags = (it)=> ["form","cover","layout2","style","palette2"].map(k=>{
+    const d = DIMS.find(x=>x.k===k); if(!d || !it[k]) return "";
+    const o = get(k, it[k]);
+    return `<span class="tag">${d.zh} ${it[k]} ${esc(o.zh||"")}</span>`;
+  }).join(" ");  const showOne = (it)=>`
+    <div class="case">
+      <div class="hd"><span class="code">${it.code}</span><h3>${esc(it.title)}</h3></div>
+      <img class="rndimg" src="${it.img}" alt="${esc(it.title)}" loading="lazy">
+      <div class="bf">${dimTags(it)}</div>
+      <div class="hint" style="margin:0 0 10px;font-size:12px">${esc(it.scene)}</div>
+      <div class="vp">${esc(it.rebuild.prompt)}</div>
+      <button class="copy" data-t="${it.code}">复制这张的提示词</button>
+      <button class="againbtn" data-t="${it.code}">换一个</button>
+    </div>`;
+  const rollOne = ()=>{
+    const items = D.gallery.items;
+    const pick = items[Math.floor(Math.random()*items.length)];
+    document.getElementById("rollOut").innerHTML = showOne(pick);
+  };
+  document.getElementById("doRandom").onclick = rollOne;
   // 抽卡结果里的复制：直接取当前 DOM 文本
   document.getElementById("rollOut").addEventListener("click", (e)=>{
+    /* 「换一个」要在复制之前拦：它也带 data-t，
+       混进复制分支会复制出一张跟按钮无关的卡。 */
+    const ag = e.target.closest(".againbtn");
+    if(ag){ rollOne(); return; }
     const b = e.target.closest(".copy"); if(!b) return;
     const box = b.closest(".case").querySelector(".vp");
     cp(withSize(box.textContent), b);

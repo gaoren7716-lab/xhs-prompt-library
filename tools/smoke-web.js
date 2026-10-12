@@ -265,6 +265,17 @@ try{ window.localStorage.clear(); }catch(e){}
   ok(doc.querySelectorAll("#rollOut .case").length === 1, "抽 1 组成功渲染");
   doc.getElementById("doRoll8").click();
   ok(doc.querySelectorAll("#rollOut .case").length === 8, "抽 8 组铺开");
+  doc.getElementById("doRoll4").click();
+  ok(doc.querySelectorAll("#rollOut .case").length === 4, "抽 4 组铺开");
+  // 随机来一张：抽画廊成品，必须带图 + 完整提示词 + 换一个
+  const rbtn = doc.getElementById("doRandom");
+  ok(rbtn && !!rbtn.querySelector("svg.dice"), "随机来一张按钮带骰子图标");
+  rbtn.click();
+  const rnd = doc.querySelector("#rollOut .case");
+  ok(rnd && !!rnd.querySelector("img.rndimg"), "随机来一张渲染成品图");
+  ok(rnd && rnd.querySelector(".vp").textContent.includes("小红书"),
+    "随机卡带完整提示词");
+  ok(doc.querySelectorAll("#rollOut .againbtn").length === 1, "随机卡带换一个");
   t3.find(b => b.dataset.v === "cases").dispatchEvent(new window.Event("click"));
   ok(doc.getElementById("v-cases").classList.contains("on"), "切到案例页");
   t3.find(b => b.dataset.v === "pairs").dispatchEvent(new window.Event("click"));
