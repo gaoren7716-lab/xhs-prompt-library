@@ -276,6 +276,59 @@ try{ window.localStorage.clear(); }catch(e){}
   ok(rnd && rnd.querySelector(".vp").textContent.includes("小红书"),
     "随机卡带完整提示词");
   ok(doc.querySelectorAll("#rollOut .againbtn").length === 1, "随机卡带换一个");
+
+  // 建系列图：主题 → 一组笔记图（封面/干货/佐证/收尾），全组统一风格与主题色
+  ok(!!doc.getElementById("doSeries"), "建系列图按钮存在");
+  ok(doc.querySelectorAll("#serChips .serchip").length >= 20, "快捷主题 chips >=20");
+  doc.getElementById("serTheme").value = "秋天";
+  doc.getElementById("doSeries").click();
+  let ser = doc.querySelectorAll("#seriesOut .sercard");
+  ok(ser.length === 4, "生成 4 张系列卡", `实际 ${ser.length}`);
+  ok(doc.querySelectorAll("#seriesOut .sercard .copy").length === 4, "每张系列卡都有复制按钮");
+  ok(ser[0].querySelector(".code").textContent.includes("封面"), "第一张是封面角色");
+  ok(ser[3].querySelector(".code").textContent.includes("收尾"), "第四张是收尾角色");
+  const serVp = ser[0].querySelector(".vp").textContent;
+  ok(serVp.includes("autumn"), "主题注入英文提示词");
+  ok(serVp.includes("1024x1536"), "系列卡带尺寸");
+  ok(serVp.includes("no watermark"), "系列卡带硬约束");
+  ok(ser[0].querySelector(".sercn").textContent.includes("主标题"), "系列卡带中文文案框架");
+  const serTitles = [...ser].map((c) => c.querySelector("h3").textContent);
+  ok(new Set(serTitles).size === serTitles.length, "同组各张标题不重复",
+    serTitles.join(" / "));
+  // 全组统一：4 张的风格码与主题色码必须相同（系列感的来源）
+  const styleTags = [...ser].map(c => {
+    const m = c.querySelector(".bf").textContent.match(/风格 (ST-\d+)/); return m && m[1];
+  });
+  const palTags = [...ser].map(c => {
+    const m = c.querySelector(".bf").textContent.match(/主题色 (C-\d+)/); return m && m[1];
+  });
+  ok(new Set(styleTags).size === 1, "全组风格统一", styleTags.join(","));
+  ok(new Set(palTags).size === 1, "全组主题色统一", palTags.join(","));
+  // 换一批版式：张数不变、主题外观不变
+  doc.getElementById("serReroll").click();
+  ok(doc.querySelectorAll("#seriesOut .sercard").length === 4, "换一批版式后仍 4 张");
+  ok(doc.querySelector("#seriesOut .sercard .vp").textContent.includes("autumn"),
+    "换一批后主题不变");
+  // 切 3 张 / 5 张
+  doc.querySelector(".sercnt[data-n='3']").click();
+  ok(doc.querySelectorAll("#seriesOut .sercard").length === 3, "切到 3 张");
+  doc.querySelector(".sercnt[data-n='5']").click();
+  ok(doc.querySelectorAll("#seriesOut .sercard").length === 5, "切到 5 张");
+  // 空主题：不崩、不生成、给常驻提示
+  doc.getElementById("serTheme").value = "";
+  doc.getElementById("doSeries").click();
+  ok(doc.querySelectorAll("#seriesOut .sercard").length === 0, "空主题不生成卡片");
+  ok(doc.getElementById("serHint").textContent.length > 0, "空主题给常驻提示");
+  ok(doc.getElementById("serHint").classList.contains("on"), "空主题提示可见");
+  // 未收录主题：按原文注入，不崩（先把张数切回默认 4）
+  doc.querySelector(".sercnt[data-n='4']").click();
+  doc.getElementById("serTheme").value = "区块链养猪";
+  doc.getElementById("doSeries").click();
+  ok(doc.querySelectorAll("#seriesOut .sercard").length === 4, "未收录主题也能建系列");
+  ok(doc.querySelector("#seriesOut .sercard .vp").textContent.includes("区块链养猪"),
+    "未收录主题按原文注入");
+  ok(!!doc.getElementById("serAll"), "复制全部按钮存在");
+
   t3.find(b => b.dataset.v === "cases").dispatchEvent(new window.Event("click"));
   ok(doc.getElementById("v-cases").classList.contains("on"), "切到案例页");
   t3.find(b => b.dataset.v === "pairs").dispatchEvent(new window.Event("click"));

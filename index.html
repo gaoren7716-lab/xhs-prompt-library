@@ -58,6 +58,20 @@ nav button.on{color:var(--ac);border-bottom-color:var(--ac);font-weight:600}
 }
 .gcopy:hover{filter:brightness(1.12)}
 .gcopy:active{transform:translateY(1px);filter:brightness(.96)}
+
+/* 建系列图 */
+.ser-wrap{margin-top:26px;border-top:1px solid var(--line);padding-top:18px}
+.ser-wrap h3{font-size:16px;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.ser-wrap h3 svg{width:17px;height:17px;color:var(--ac);flex:none}
+.ser-input{flex:1;min-width:220px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;color:var(--tx);font-family:inherit;font-size:13px}
+.ser-input:focus{outline:none;border-color:var(--ac)}
+.serchip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--tx2);font-family:inherit;font-size:12px;cursor:pointer}
+.serchip:hover{color:var(--tx);border-color:var(--ac)}
+.sercnt.on{border-color:var(--ac);color:var(--ac)}
+.sercn{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:11px 13px;font-size:12.5px;line-height:1.8;white-space:pre-line;color:#c8d0e0;margin-bottom:12px}
+.sercn b{color:var(--ok);font-weight:600}
+.serhint{min-height:18px;margin:0 0 6px}
+.serhint.on{color:var(--warn)}
 .gload{background:transparent;border:1px solid var(--ac);color:var(--ac2)}
 .gload:hover{background:rgba(255,46,77,.14);color:#fff}
 .gload:active{transform:translateY(1px)}
@@ -313,6 +327,27 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
     </div>
     <div class="hint" style="margin:0 0 12px;font-size:12px">抽 1/4/8 组是<b>现凑新组合</b>；「随机来一张」是<b>从画廊 40 张真实出图里随机抽一张</b>，图和提示词都是验过的成品。</div>
     <div id="rollOut"></div>
+
+    <div class="ser-wrap">
+      <h3><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="3" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="3" y="13" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="13" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>建系列图</h3>
+      <div class="hint" style="margin:0 0 4px">给一个主题，按小红书笔记节奏自动建一组图：<b>封面抓眼 → 干货主体 → 对比佐证 → 金句收尾</b>（5 张时再加演）。全组统一风格与主题色，看起来是一套；每张自带完整提示词与中文文案框架。</div>
+      <div class="hint" style="margin:0 0 10px;font-size:12px">角色分工与节奏是验过的结构；具体版式在角色指定大类里随机抽——抽到不满意的点「换一批版式」。</div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:10px">
+        <input class="ser-input" id="serTheme" placeholder="输入主题，如：秋天 / 考研 / 露营 / 穿搭">
+        <button class="btn" id="doSeries" style="width:auto;padding:9px 22px">生成系列</button>
+      </div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px" id="serChips"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+        <span style="color:var(--tx3);font-size:12px">张数：</span>
+        <button class="btn sec sercnt" data-n="3" style="width:auto;margin:0;padding:6px 14px;font-size:12px">3 张</button>
+        <button class="btn sec sercnt on" data-n="4" style="width:auto;margin:0;padding:6px 14px;font-size:12px">4 张</button>
+        <button class="btn sec sercnt" data-n="5" style="width:auto;margin:0;padding:6px 14px;font-size:12px">5 张</button>
+        <button class="btn sec" id="serAll" style="width:auto;margin:0;padding:6px 14px;font-size:12px">复制全部</button>
+        <button class="btn sec" id="serReroll" style="width:auto;margin:0;padding:6px 14px;font-size:12px">换一批版式</button>
+      </div>
+      <div class="hint serhint" id="serHint"></div>
+      <div id="seriesOut"></div>
+    </div>
   </div>
 </div>
 
@@ -876,6 +911,115 @@ function renderGacha(){
   });
 }
 
+/* ---- 建系列图 ---- */
+/* 给一个主题 → 一组小红书笔记图。两条设计决定：
+   ① 全组统一风格与主题色（只定一次）——系列图看起来是一套，比每张随机强；
+   ② 角色分工固定、具体版式在角色指定大类里随机抽——结构是验过的，搭配是新的，
+      所以「换一批版式」只重抽形态/封面/版式，不动主题与统一外观。 */
+function renderSeries(){
+  const SER = D.series;
+  const esc = (s)=> String(s==null?"":s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const themeInput = document.getElementById("serTheme");
+  const out = document.getElementById("seriesOut");
+  const hint = document.getElementById("serHint");
+  const cntBtns = [...document.querySelectorAll(".sercnt")];
+  const dimLabel = { form:"形态", cover:"封面", layout2:"排版", style:"风格", palette2:"主题色", decor:"装饰" };
+  const tag = (k,o)=> o ? `<span class="tag">${dimLabel[k]||k} ${o.code} ${esc(o.zh||"")}</span>` : "";
+  const pick = (arr)=> arr[Math.floor(Math.random()*arr.length)];
+  let count = SER.meta.defaultCount || 4;
+  let plans = [];   // 当前批：复制全部/复制单张都从这里取，不读 DOM
+  let look = null;  // 全组统一的风格+主题色（换一批版式时沿用）
+
+  document.getElementById("serChips").innerHTML = SER.themes.map(t=>
+    `<button class="serchip" data-th="${esc(t.zh)}">${esc(t.zh)}</button>`).join("");
+  document.getElementById("serChips").addEventListener("click", (e)=>{
+    const b = e.target.closest(".serchip"); if(!b) return;
+    themeInput.value = b.dataset.th;
+    build(false);
+  });
+
+  cntBtns.forEach(b=> b.onclick = ()=>{
+    cntBtns.forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    count = +b.dataset.n;
+    if(plans.length) build(false);  // 张数变了重出，风格按当前主题重定
+  });
+
+  function build(keepLook){
+    const raw = themeInput.value.trim();
+    if(!raw){
+      hint.textContent = "先填一个主题（如：秋天 / 考研 / 露营），或点上面的快捷主题";
+      hint.classList.add("on");
+      themeInput.focus();
+      out.innerHTML = ""; plans = [];
+      return;
+    }
+    hint.classList.remove("on"); hint.textContent = "";
+    const th = SER.themes.find(t=> raw.includes(t.zh) || t.zh.includes(raw)) || null;
+    const themeEn = th ? th.en : 'theme "' + raw + '"';
+    if(!keepLook || !look){
+      look = {
+        style: th ? get("style", th.style) : pick(D.styles.items),
+        pal:   th ? get("palette2", th.palette2) : pick(D.palette36.items)
+      };
+    }
+    const ids = SER.sets[String(count)] || SER.sets[String(SER.meta.defaultCount)];
+    // 标题钩子先洗牌再按序发：一组笔记里各张标题撞车比没有标题更糟
+    const hookPool = th ? [...th.hooks].sort(()=>Math.random()-0.5) : [];
+    plans = ids.map((rid, i)=>{
+      const role = SER.roles.find(r=>r.id===rid);
+      const form = get("form", pick(role.forms));
+      const cover = get("cover", pick(role.covers));
+      const pool = D.layouts165.items.filter(x=> role.layoutCats.includes(x.cat));
+      const layout = pick(pool.length ? pool : D.layouts165.items);
+      const decor = (role.decor && role.decor.length) ? get("decor", pick(role.decor)) : null;
+      const en = [look.style.prompt, look.pal.prompt, layout.prompt,
+                  decor && decor.prompt ? decor.prompt : "",
+                  "theme: " + themeEn,
+                  "vertical 3:4 aspect ratio, 1024x1536 pixels",
+                  typoEn(), HARD].filter(Boolean).join(", ");
+      // 兜底标题取公式「」里的示例句——把「金句+行动号召（…）」这种注解
+      // 原样当标题会显得没写完；示例句本身就是一句能用的标题。
+      const quoted = (role.titleFormula.match(/「(.+?)」/) || [])[1];
+      const fallback = (quoted || role.titleFormula).replace(/\{theme\}/g, raw);
+      const title = th ? (hookPool[i] || fallback) : fallback;
+      return { i, role, form, cover, layout, decor, en, title };
+    });
+    out.innerHTML = plans.map(p=>`
+      <div class="case sercard">
+        <div class="hd"><span class="code">${p.i+1}/${plans.length} · ${p.role.zh}</span><h3>${esc(p.title)}</h3></div>
+        <div class="hint" style="margin:0 0 9px;font-size:12px">${esc(p.role.job)} —— ${esc(p.role.why)}</div>
+        <div class="bf">${tag("form",p.form)} ${tag("cover",p.cover)} ${tag("layout2",p.layout)} ${tag("style",look.style)} ${tag("palette2",look.pal)} ${tag("decor",p.decor)}</div>
+        <div class="sercn"><b>中文文案框架（自己填）：</b>
+主标题：${esc(p.title)}
+副标题：点明人群或场景（如：25-35岁通勤女生）
+要点：${esc(p.role.copyGuide)}
+结尾引导：收藏这篇，${esc(raw)}用得上时翻出来</div>
+        <div class="vp">${esc(p.en)}</div>
+        <button class="copy" data-sn="${p.i}">复制这张</button>
+      </div>`).join("")
+      + (th ? "" : `<div class="note">未收录「${esc(raw)}」：已按原文注入提示词，风格（${esc(look.style.zh)}）与主题色（${esc(look.pal.zh)}）仍全组统一。想更准就换一个更通用的主题词。</div>`);
+  }
+
+  document.getElementById("doSeries").onclick = ()=> build(false);
+  document.getElementById("serReroll").onclick = ()=>{
+    if(!plans.length){ build(false); return; }
+    build(true);  // 主题/风格/主题色不变，只重抽形态封面版式
+  };
+  document.getElementById("serAll").onclick = (e)=>{
+    if(!plans.length) return;
+    let txt = "";
+    plans.forEach(p=>{ txt += `【第${p.i+1}张 · ${p.role.zh}】\n${p.en}\n\n`; });
+    cp(withSize(txt.trim()), e.target);
+  };
+  out.addEventListener("click", (e)=>{
+    const b = e.target.closest(".copy"); if(!b) return;
+    const p = plans[+b.dataset.sn];
+    if(p) cp(withSize(p.en), b);
+  });
+}
+
 /* ---- 搭配 ---- */
 function renderPairs(){
   const P = D.stylepair;
@@ -954,7 +1098,7 @@ const save = (()=>{ try{ return localStorage.getItem("xhs"); }catch(e){ return n
     `<div class="stat"><b>${D[DATA_OF[d.k]].items.length}</b>${d.zh}</div>`).join("") +
     `<div class="stat"><b>${D.cases.items.length}</b>验证案例</div>`;
 
-  renderFields(); render(); renderGallery(); renderCustom(); renderGacha(); renderCases(); renderEntries(); renderPairs(); renderFramework();
+  renderFields(); render(); renderGallery(); renderCustom(); renderGacha(); renderSeries(); renderCases(); renderEntries(); renderPairs(); renderFramework();
 
   document.getElementById("copyEn").onclick = e=>cp(withSize(enText()), e.target);
   document.getElementById("copyCn").onclick = e=>cp(

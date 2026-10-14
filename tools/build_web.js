@@ -26,6 +26,8 @@ const FILES = [
   "layouts165", "palette36", "stylepair",
   // 示例画廊 + 自定义工作台
   "gallery", "custom", "rights",
+  // 建系列图（角色分工 + 主题词典）
+  "series",
 ];
 
 const bundle = {};
@@ -42,6 +44,7 @@ for (const name of FILES) {
   const n = j.items ? j.items.length
           : j.pairs ? j.pairs.length
           : j.topicPresets ? j.topicPresets.length
+          : j.roles ? j.roles.length + j.themes.length
           : 0;
   total += n;
   console.log(`  ${name.padEnd(9)} ${String(n).padStart(3)} 条`);

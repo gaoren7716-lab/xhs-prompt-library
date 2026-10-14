@@ -350,6 +350,43 @@ ok(R.total === 0, `措辞查重 0 雷同（当前 ${R.total}，判定 ${R.verdic
   R.total > 0 ? R.details.slice(0, 6).map((d) => `「${d.frag}」@${d.file} ← ${d.src}`).join("; ") : "");
 ok(R.scanned >= 10, `查重扫描了 ${R.scanned} 个文件`, `实际 ${R.scanned}`);
 
+// ---- 2.10 建系列图（series.json）引用完整性 ----------------------
+// 角色指定的形态/封面/装饰码、主题指定的风格/主题色码，改码后不会自动跟，
+// 必须静态扫——和案例引用同一条理由。
+const serPath = path.join(DATA, "series.json");
+if (fs.existsSync(serPath)) {
+  const ser = JSON.parse(fs.readFileSync(serPath, "utf8"));
+  ok(bundleKeys.has("series"), "bundle 含 series 数据表");
+  const roleIds = ser.roles.map((r) => r.id);
+  ok(new Set(roleIds).size === roleIds.length, "series 角色 id 无重复");
+  const knownCats = new Set([...tables.layout2.values()].map((x) => x.cat));
+  ser.roles.forEach((r) => {
+    ok(!!r.zh && !!r.job && !!r.copyGuide && !!r.why, `${r.id} 五个字段齐全`);
+    r.forms.forEach((c) => ok(tables.form.has(c), `${r.id} 形态码 ${c} 存在`));
+    r.covers.forEach((c) => ok(tables.cover.has(c), `${r.id} 封面码 ${c} 存在`));
+    (r.decor || []).forEach((c) => ok(tables.decor.has(c), `${r.id} 装饰码 ${c} 存在`));
+    (r.layoutCats || []).forEach((c) => ok(knownCats.has(c), `${r.id} 排版大类 ${c} 存在`));
+    ok((r.layoutCats || []).length > 0, `${r.id} 指定了排版大类（否则版式池为空）`);
+  });
+  // 张数方案必须指向真实角色，且 3/4/5 都在
+  ["3", "4", "5"].forEach((n) => {
+    ok(Array.isArray(ser.sets[n]) && ser.sets[n].length === +n,
+      `series ${n} 张方案存在且张数吻合`, `实际 ${ser.sets[n] ? ser.sets[n].length : 0}`);
+    (ser.sets[n] || []).forEach((rid) => ok(roleIds.includes(rid),
+      `series ${n} 张方案引用角色 ${rid} 存在`));
+  });
+  ok(ser.sets["4"][0] === "SR-01", "4 张方案第一张是封面（笔记第一图必须是封面）");
+  const thIds = ser.themes.map((t) => t.id);
+  ok(new Set(thIds).size === thIds.length, "series 主题 id 无重复");
+  ok(ser.themes.length >= 20, "主题词典 >=20 个", `实际 ${ser.themes.length}`);
+  ser.themes.forEach((t) => {
+    ok(!!t.zh && !!t.en, `${t.id} 有中英文主题词`);
+    ok(tables.style.has(t.style), `${t.id} 风格码 ${t.style} 存在`);
+    ok(tables.palette2.has(t.palette2), `${t.id} 主题色码 ${t.palette2} 存在`);
+    ok((t.hooks || []).length >= 2, `${t.id} 至少 2 个标题钩子`);
+  });
+}
+
 // ---- 3. 盲区量化（框架深度的作业清单）---------------------------
 const comboSpace = tables.form.size * tables.layout.size;
 console.log(`\n─── 盲区 ───`);
