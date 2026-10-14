@@ -164,7 +164,7 @@ try{ window.localStorage.clear(); }catch(e){}
 
   // ---- 9. 画廊页 ----
   const tabs = [...doc.querySelectorAll("nav button")];
-  ok(tabs.length === 8, "8 个页签", `实际 ${tabs.length}`);
+  ok(tabs.length === 9, "9 个页签", `实际 ${tabs.length}`);
   ok(tabs[0].dataset.v === "gallery", "第一页是示例画廊");
   ok(doc.getElementById("v-gallery").classList.contains("on"), "画廊页默认展开");
   const gcards = doc.querySelectorAll("#galGrid .gcard");
@@ -277,6 +277,15 @@ try{ window.localStorage.clear(); }catch(e){}
     "随机卡带完整提示词");
   ok(doc.querySelectorAll("#rollOut .againbtn").length === 1, "随机卡带换一个");
 
+  // 建系列图：独立页，导航顺序在抽卡与验证案例之间
+  const navLabels = [...doc.querySelectorAll("nav button")].map(b=>b.dataset.v);
+  ok(navLabels.indexOf("series") === navLabels.indexOf("gacha")+1
+     && navLabels.indexOf("cases") === navLabels.indexOf("series")+1,
+    "建系列图独立页且位于抽卡与验证案例之间", navLabels.join(">"));
+  t3.find(b => b.dataset.v === "series").dispatchEvent(new window.Event("click"));
+  ok(doc.getElementById("v-series").classList.contains("on"), "切到建系列图页");
+  ok(!!doc.querySelector("#v-series .ser-wrap"), "系列图块挂在独立页内");
+  ok(!doc.querySelector("#v-gacha .ser-wrap"), "抽卡页不再包含系列图块");
   // 建系列图：主题 → 一组笔记图（封面/干货/佐证/收尾），全组统一风格与主题色
   ok(!!doc.getElementById("doSeries"), "建系列图按钮存在");
   ok(doc.querySelectorAll("#serChips .serchip").length >= 20, "快捷主题 chips >=20");
@@ -327,7 +336,10 @@ try{ window.localStorage.clear(); }catch(e){}
   ok(doc.querySelectorAll("#seriesOut .sercard").length === 4, "未收录主题也能建系列");
   ok(doc.querySelector("#seriesOut .sercard .vp").textContent.includes("区块链养猪"),
     "未收录主题按原文注入");
-  ok(!!doc.getElementById("serAll"), "复制全部按钮存在");
+  ok(!!doc.getElementById("serAll"), "一键复制按钮存在");
+  // 系列卡复制按钮必须突出（红渐变作用域样式），防止样式被误删回退成低调文字链
+  ok(html.includes(".sercard .copy{"), "系列卡复制按钮带红渐变突出样式");
+  ok(html.includes("复制这张的提示词"), "系列卡复制按钮文案对齐抽卡说法");
 
   t3.find(b => b.dataset.v === "cases").dispatchEvent(new window.Event("click"));
   ok(doc.getElementById("v-cases").classList.contains("on"), "切到案例页");

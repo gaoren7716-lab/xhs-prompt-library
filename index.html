@@ -56,13 +56,20 @@ nav button.on{color:var(--ac);border-bottom-color:var(--ac);font-weight:600}
   background:linear-gradient(180deg,var(--ac2),var(--ac));
   border:none;color:#fff;box-shadow:0 1px 8px rgba(255,46,77,.35);
 }
+/* 系列出图：每张卡的复制按钮与画廊卡同权重（红渐变实底），不再是低调文字链 */
+.sercard .copy{
+  margin-top:12px;display:inline-block;background:linear-gradient(180deg,var(--ac2),var(--ac));
+  border:none;color:#fff;border-radius:8px;padding:9px 18px;font-size:12.5px;font-weight:700;
+  letter-spacing:.3px;box-shadow:0 1px 8px rgba(255,46,77,.35);cursor:pointer;font-family:inherit;
+}
+.sercard .copy:hover{filter:brightness(1.12)}
+.sercard .copy:active{transform:translateY(1px);filter:brightness(.96)}
 .gcopy:hover{filter:brightness(1.12)}
 .gcopy:active{transform:translateY(1px);filter:brightness(.96)}
 
-/* 建系列图 */
-.ser-wrap{margin-top:26px;border-top:1px solid var(--line);padding-top:18px}
-.ser-wrap h3{font-size:16px;margin-bottom:7px;display:flex;align-items:center;gap:8px}
-.ser-wrap h3 svg{width:17px;height:17px;color:var(--ac);flex:none}
+/* 系列出图 */
+.ser-wrap h2{font-size:16px;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.ser-wrap h2 svg{width:17px;height:17px;color:var(--ac);flex:none}
 .ser-input{flex:1;min-width:220px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;color:var(--tx);font-family:inherit;font-size:13px}
 .ser-input:focus{outline:none;border-color:var(--ac)}
 .serchip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--tx2);font-family:inherit;font-size:12px;cursor:pointer}
@@ -207,6 +214,7 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
   <button data-v="custom">自定义出图</button>
   <button data-v="synth">提示词合成器</button>
   <button data-v="gacha">抽卡</button>
+  <button data-v="series">系列出图</button>
   <button data-v="cases">验证案例</button>
   <button data-v="entries">全部词条</button>
   <button data-v="pairs">风格配色搭配</button>
@@ -327,9 +335,14 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
     </div>
     <div class="hint" style="margin:0 0 12px;font-size:12px">抽 1/4/8 组是<b>现凑新组合</b>；「随机来一张」是<b>从画廊 40 张真实出图里随机抽一张</b>，图和提示词都是验过的成品。</div>
     <div id="rollOut"></div>
+  </div>
+</div>
 
+<!-- 系列出图 -->
+<div class="view" id="v-series">
+  <div class="panel">
     <div class="ser-wrap">
-      <h3><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="3" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="3" y="13" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="13" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>建系列图</h3>
+      <h2><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="3" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="3" y="13" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="13" width="8" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>系列出图</h2>
       <div class="hint" style="margin:0 0 4px">给一个主题，按小红书笔记节奏自动建一组图：<b>封面抓眼 → 干货主体 → 对比佐证 → 金句收尾</b>（5 张时再加演）。全组统一风格与主题色，看起来是一套；每张自带完整提示词与中文文案框架。</div>
       <div class="hint" style="margin:0 0 10px;font-size:12px">角色分工与节奏是验过的结构；具体版式在角色指定大类里随机抽——抽到不满意的点「换一批版式」。</div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:10px">
@@ -342,7 +355,7 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
         <button class="btn sec sercnt" data-n="3" style="width:auto;margin:0;padding:6px 14px;font-size:12px">3 张</button>
         <button class="btn sec sercnt on" data-n="4" style="width:auto;margin:0;padding:6px 14px;font-size:12px">4 张</button>
         <button class="btn sec sercnt" data-n="5" style="width:auto;margin:0;padding:6px 14px;font-size:12px">5 张</button>
-        <button class="btn sec" id="serAll" style="width:auto;margin:0;padding:6px 14px;font-size:12px">复制全部</button>
+        <button class="gcopy" id="serAll" style="width:auto;margin:0;padding:8px 18px;font-size:13px">一键复制</button>
         <button class="btn sec" id="serReroll" style="width:auto;margin:0;padding:6px 14px;font-size:12px">换一批版式</button>
       </div>
       <div class="hint serhint" id="serHint"></div>
@@ -911,7 +924,7 @@ function renderGacha(){
   });
 }
 
-/* ---- 建系列图 ---- */
+/* ---- 系列出图 ---- */
 /* 给一个主题 → 一组小红书笔记图。两条设计决定：
    ① 全组统一风格与主题色（只定一次）——系列图看起来是一套，比每张随机强；
    ② 角色分工固定、具体版式在角色指定大类里随机抽——结构是验过的，搭配是新的，
@@ -997,7 +1010,7 @@ function renderSeries(){
 要点：${esc(p.role.copyGuide)}
 结尾引导：收藏这篇，${esc(raw)}用得上时翻出来</div>
         <div class="vp">${esc(p.en)}</div>
-        <button class="copy" data-sn="${p.i}">复制这张</button>
+        <button class="copy" data-sn="${p.i}">复制这张的提示词</button>
       </div>`).join("")
       + (th ? "" : `<div class="note">未收录「${esc(raw)}」：已按原文注入提示词，风格（${esc(look.style.zh)}）与主题色（${esc(look.pal.zh)}）仍全组统一。想更准就换一个更通用的主题词。</div>`);
   }
